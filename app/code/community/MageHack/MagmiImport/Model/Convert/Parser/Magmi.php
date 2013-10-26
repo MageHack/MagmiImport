@@ -14,7 +14,8 @@ class MageHack_MagmiImport_Model_Convert_Parser_Magmi extends Mage_Dataflow_Mode
             'profile' => 'default',
             'mode' => 'create',
             'engine' => 'magmi_productimportengine:Magmi_ProductImportEngine',
-            'files' => '..'.DS.'..'.DS.'var'.DS.'import'.DS.$this->getVar('filename')
+            'CSV:filename' => Mage::getBaseDir('var').DS.'import'.DS.$this->getVar('filename'),
+            'files' => Mage::getBaseDir('var').DS.'import'.DS.$this->getVar('filename')
         );
 
         require_once(Mage::getBaseDir().DS.'magmi'.DS.'inc'.DS.'magmi_defs.php');
