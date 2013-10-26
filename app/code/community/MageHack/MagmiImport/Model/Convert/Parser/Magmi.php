@@ -7,13 +7,15 @@ class MageHack_MagmiImport_Model_Convert_Parser_Magmi extends Mage_Dataflow_Mode
 
     public function parse()
     {
-        $params=array(	'ts' => time(),
+        $params=array(
+            'ts' => time(),
             'run' => 'import',
             'logfile' => 'progress.txt',
             'profile' => 'default',
             'mode' => 'create',
             'engine' => 'magmi_productimportengine:Magmi_ProductImportEngine',
-            'files' => Mage::app()->getRequest()->getParam('files'));
+            'files' => '..'.DS.'..'.DS.'var'.DS.'import'.DS.$this->getVar('filename')
+        );
 
         require_once(Mage::getBaseDir().DS.'magmi'.DS.'inc'.DS.'magmi_defs.php');
         require_once(Mage::getBaseDir().DS.'magmi'.DS.'inc'.DS.'magmi_statemanager.php');
@@ -25,12 +27,14 @@ class MageHack_MagmiImport_Model_Convert_Parser_Magmi extends Mage_Dataflow_Mode
         catch(Exception $e)
         {
             // die("ERROR");
+            print "NO ENGINE";
             throw new Mage_Exception("Cannot load the desired Magmi engine");
         }
 
         if(Magmi_StateManager::getState()!=="running")
         {
             Magmi_StateManager::setState("idle");
+
             $pf=Magmi_StateManager::getProgressFile(true);
             if(file_exists($pf)) {
                 @unlink($pf);
@@ -51,7 +55,6 @@ class MageHack_MagmiImport_Model_Convert_Parser_Magmi extends Mage_Dataflow_Mode
                 $mmi_imp->setLogger(new EchoLogger());
 
             }
-
             $mmi_imp->run($params);
 
         }
