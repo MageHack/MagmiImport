@@ -17,8 +17,16 @@ class MageHack_MagmiImport_Model_Convert_Parser_Magmi extends Mage_Dataflow_Mode
 
         require_once(Mage::getBaseDir().DS.'magmi'.DS.'inc'.DS.'magmi_defs.php');
         require_once(Mage::getBaseDir().DS.'magmi'.DS.'inc'.DS.'magmi_statemanager.php');
-        require_once(Mage::getBaseDir().DS.'magmi'.DS.'engines'.DS.'magmi_productimportengine.php');
-        require_once(Mage::getBaseDir().DS.'magmi'.DS.'web'.DS.'magmi_run.php');
+
+        try
+        {
+            require_once(Mage::getBaseDir().DS.'magmi'.DS.'engines'.DS.'Magmi_ProductImportEngine.php');
+        }
+        catch(Exception $e)
+        {
+            // die("ERROR");
+            throw new Mage_Exception("Cannot load the desired Magmi engine");
+        }
 
         if(Magmi_StateManager::getState()!=="running")
         {
