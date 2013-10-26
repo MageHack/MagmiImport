@@ -5,7 +5,6 @@
             <magmiimport>
                 <class>MageHack_MagmiImport_Model</class>
             </magmiimport>
-            <catalog>
         </models>
     </global>
 </config>
