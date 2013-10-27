@@ -23,10 +23,12 @@ To use the integration you will have to create a dataflow advanced profile
 with at least the adapter paramether set to 
 magmiimport/convert_adapter_product
 
-For example:
+For example I've used this xml for the demo:
 
 ~~~ xml
-<action type="magmiimport/convert_parser_magmi" method="parse" />
+<action type="magmiimport/convert_parser_magmi" method="parse">
+   <var name="filename"><![CDATA[products.csv]]></var>
+</action>
 ~~~
 
 # Still in TODO
