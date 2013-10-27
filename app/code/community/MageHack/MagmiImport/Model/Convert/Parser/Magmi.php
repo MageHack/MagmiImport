@@ -21,7 +21,7 @@ class MageHack_MagmiImport_Model_Convert_Parser_Magmi extends Mage_Dataflow_Mode
         require_once(Mage::getBaseDir().DS.'magmi'.DS.'inc'.DS.'magmi_defs.php');
         require_once(Mage::getBaseDir().DS.'magmi'.DS.'inc'.DS.'magmi_statemanager.php');
 
-        unlink(Mage::getBaseDir().DS.'magmi'.DS.'conf'.DS.'Magmi_CSVDataSource.conf');
+        @unlink(Mage::getBaseDir().DS.'magmi'.DS.'conf'.DS.'Magmi_CSVDataSource.conf');
 
         try
         {
