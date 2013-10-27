@@ -21,6 +21,8 @@ class MageHack_MagmiImport_Model_Convert_Parser_Magmi extends Mage_Dataflow_Mode
         require_once(Mage::getBaseDir().DS.'magmi'.DS.'inc'.DS.'magmi_defs.php');
         require_once(Mage::getBaseDir().DS.'magmi'.DS.'inc'.DS.'magmi_statemanager.php');
 
+        unlink(Mage::getBaseDir().DS.'magmi'.DS.'conf'.DS.'Magmi_CSVDataSource.conf');
+
         try
         {
             require_once(Mage::getBaseDir().DS.'magmi'.DS.'engines'.DS.'Magmi_ProductImportEngine.php');
@@ -43,24 +45,13 @@ class MageHack_MagmiImport_Model_Convert_Parser_Magmi extends Mage_Dataflow_Mode
             set_time_limit(0);
 
             $mmi_imp = new Magmi_ProductImportEngine();
-            $logfile=isset($params["logfile"])?$params["logfile"]:null;
-            if(isset($logfile) && $logfile!="") {
-                $fileName=Magmi_StateManager::getStateDir().DS.$logfile;
-                if(file_exists($fileName))
-                {
-                    @unlink($fileName);
-                }
-                $mmi_imp->setLogger(new FileLogger($fileName));
-            }
-            else {
-                $mmi_imp->setLogger(new EchoLogger());
-
-            }
+            $mmi_imp->setLogger(new EchoLogger());
             $mmi_imp->run($params);
+            return "Has run";
 
         }
         else {
-            return "Still running ";
+            return "Still running";
         }
     }
 
