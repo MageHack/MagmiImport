@@ -66,9 +66,7 @@ class DynamicMapperProcessor extends Magmi_ItemProcessor
                                 )
                             );
 
-        $ra = Mage::getSingleton('core/resource')->getConnection('core_read');
-        // No prefix support, @TODO handle database with some flexibility
-        $res = $ra->fetchAll("SELECT a.attribute_code, o.option_id, v.value label FROM  eav_attribute_option o LEFT JOIN eav_attribute a ON a.attribute_id = o.attribute_id LEFT JOIN eav_attribute_option_value v ON o.option_id = v.option_id");
+        $res = $this->selectAll("SELECT a.attribute_code, o.option_id, v.value label FROM eav_attribute_option o LEFT JOIN eav_attribute a ON a.attribute_id = o.attribute_id LEFT JOIN eav_attribute_option_value v ON o.option_id = v.option_id");
 
         foreach($res as $item)
         {
