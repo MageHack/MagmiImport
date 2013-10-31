@@ -66,7 +66,10 @@ class DynamicMapperProcessor extends Magmi_ItemProcessor
                                 )
                             );
 
-        $res = $this->selectAll("SELECT a.attribute_code, o.option_id, v.value label FROM eav_attribute_option o LEFT JOIN eav_attribute a ON a.attribute_id = o.attribute_id LEFT JOIN eav_attribute_option_value v ON o.option_id = v.option_id");
+        // Escaping maybe ?
+        $tprefix = $this->_magmiconfig->get("DATABASE","table_prefix");
+
+        $res = $this->selectAll("SELECT a.attribute_code, o.option_id, v.value label FROM {$tprefix}eav_attribute_option o LEFT JOIN {$tprefix}eav_attribute a ON a.attribute_id = o.attribute_id LEFT JOIN {$tprefix}eav_attribute_option_value v ON o.option_id = v.option_id");
 
         foreach($res as $item)
         {
