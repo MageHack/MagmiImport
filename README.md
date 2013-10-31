@@ -31,10 +31,13 @@ For example I've used this xml for the demo:
 </action>
 ~~~
 
+# Configuration
+
+Magmi folder location can be set in System/Configuration/Catalog/Magmi Import.
+
 # Still in TODO
 
 * demo file for import
-* magmi folder name is hardcoded in the code
 * check for content errors before import
 * fire observers after magmi run
 * importing images
