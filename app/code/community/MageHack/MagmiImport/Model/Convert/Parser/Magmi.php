@@ -5,6 +5,8 @@
 class MageHack_MagmiImport_Model_Convert_Parser_Magmi extends Mage_Dataflow_Model_Convert_Parser_Csv
 {
 
+    const MAGMI_PATH = 'magmi';
+
     public function parse()
     {
         $params=array(
@@ -13,19 +15,21 @@ class MageHack_MagmiImport_Model_Convert_Parser_Magmi extends Mage_Dataflow_Mode
             'logfile' => 'progress.txt',
             'profile' => 'default',
             'mode' => 'create',
-            'engine' => 'magmi_productimportengine:magmi_productimportengine',
+            'engine' => 'magmi_productimportengine:Magmi_ProductImportEngine',
             'CSV:filename' => Mage::getBaseDir('var').DS.'import'.DS.$this->getVar('filename'),
             'files' => Mage::getBaseDir('var').DS.'import'.DS.$this->getVar('filename')
         );
 
-        require_once(Mage::getBaseDir().DS.'magmi'.DS.'inc'.DS.'magmi_defs.php');
-        require_once(Mage::getBaseDir().DS.'magmi'.DS.'inc'.DS.'magmi_statemanager.php');
+        $magmiFolder = Mage::getBaseDir().DS.Mage::getStoreConfig('catalog/magmiimport/magmi_folder');
 
-        @unlink(Mage::getBaseDir().DS.'magmi'.DS.'conf'.DS.'Magmi_CSVDataSource.conf');
+        require_once($magmiFolder.DS.'inc'.DS.'magmi_defs.php');
+        require_once($magmiFolder.DS.'inc'.DS.'magmi_statemanager.php');
+
+        @unlink($magmiFolder.DS.'conf'.DS.'Magmi_CSVDataSource.conf');
 
         try
         {
-            require_once(Mage::getBaseDir().DS.'magmi'.DS.'engines'.DS.'magmi_productimportengine.php');
+            require_once($magmiFolder.DS.'engines'.DS.'Magmi_ProductImportEngine.php');
         }
         catch(Exception $e)
         {

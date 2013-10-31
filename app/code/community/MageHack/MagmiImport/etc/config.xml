@@ -7,4 +7,11 @@
             </magmiimport>
         </models>
     </global>
+    <default>
+        <catalog>
+            <magmiimport>
+                <magmi_folder>magmi</magmi_folder>
+            </magmiimport>
+        </catalog>
+    </default>
 </config>
